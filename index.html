@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyFlow AI</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #090b12;
+    --panel: #111522;
+    --panel2: #171b2a;
+    --text: #f4f6ff;
+    --muted: #8d95ad;
+    --border: #272d42;
+    --accent: #7667ff;
+    --accent2: #9a8fff;
+    --danger: #ff5c6c;
+    --success: #36d399;
+}
+
+body.light {
+    --bg: #f3f5fa;
+    --panel: #ffffff;
+    --panel2: #eef1f7;
+    --text: #171a25;
+    --muted: #687084;
+    --border: #dce1eb;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: .25s;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 245px;
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    padding: 25px 15px;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    padding: 0 12px 30px;
+}
+
+.logo span {
+    color: var(--accent2);
+}
+
+.nav-btn {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 7px;
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    text-align: left;
+    border-radius: 10px;
+    transition: .2s;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+    background: var(--panel2);
+    color: var(--text);
+}
+
+.nav-btn.active {
+    border-left: 3px solid var(--accent);
+}
+
+/* MAIN */
+
+.main {
+    margin-left: 245px;
+    padding: 30px;
+    max-width: 1500px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.welcome h1 {
+    font-size: 30px;
+}
+
+.welcome p {
+    color: var(--muted);
+    margin-top: 7px;
+}
+
+.icon-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+}
+
+/* PAGES */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+/* CARDS */
+
+.card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.stat {
+    min-height: 130px;
+}
+
+.stat-title {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    margin-top: 15px;
+}
+
+.stat-small {
+    color: var(--success);
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.section {
+    margin-top: 22px;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.section-title h2 {
+    font-size: 20px;
+}
+
+/* BUTTONS */
+
+.primary {
+    background: var(--accent);
+    border: 0;
+    color: white;
+    padding: 11px 17px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.primary:hover {
+    opacity: .85;
+}
+
+.secondary {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+/* TASKS */
+
+.task {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.task:last-child {
+    border-bottom: 0;
+}
+
+.task-check {
+    width: 21px;
+    height: 21px;
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+
+.task.completed span {
+    text-decoration: line-through;
+    color: var(--muted);
+}
+
+.task-subject {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* PROGRESS */
+
+.progress {
+    height: 9px;
+    background: var(--panel2);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0;
+    transition: .4s;
+}
+
+/* SUBJECTS */
+
+.subject-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.subject-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.subject-icon {
+    font-size: 30px;
+}
+
+.subject-name {
+    font-weight: 700;
+    margin-top: 12px;
+}
+
+.subject-progress {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+/* INPUTS */
+
+.form {
+    display: grid;
+    gap: 12px;
+    max-width: 550px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--panel2);
+    color: var(--text);
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--accent);
+}
+
+/* QUIZ */
+
+.quiz-box {
+    max-width: 800px;
+}
+
+.quiz-question {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 9px 0;
+    background: var(--panel2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-align: left;
+}
+
+.option:hover {
+    border-color: var(--accent);
+}
+
+.option.correct {
+    background: rgba(54,211,153,.2);
+    border-color: var(--success);
+}
+
+.option.wrong {
+    background: rgba(255,92,108,.2);
+    border-color: var(--danger);
+}
+
+.quiz-result {
+    text-align: center;
+    padding: 30px;
+}
+
+.score-big {
+    font-size: 50px;
+    font-weight: 900;
+}
+
+/* TIMER */
+
+.timer {
+    text-align: center;
+    max-width: 700px;
+    margin: auto;
+}
+
+.timer-display {
+    font-size: 90px;
+    font-weight: 800;
+    margin: 40px 0;
+}
+
+.timer-mode {
+    color: var(--muted);
+    margin-top: 15px;
+}
+
+/* EMPTY */
+
+.empty {
+    color: var(--muted);
+    text-align: center;
+    padding: 30px;
+}
+
+/* MOBILE */
+
+.mobile-menu {
+    display: none;
+}
+
+@media(max-width: 900px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: .3s;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 18px;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .subject-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 550px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timer-display {
+        font-size: 60px;
+    }
+
+    .welcome h1 {
+        font-size: 23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        📚 Study<span>Flow</span>
+    </div>
+
+    <button class="nav-btn active" onclick="showPage('dashboard', this)">
+        🏠 Dashboard
+    </button>
+
+    <button class="nav-btn" onclick="showPage('subjects', this)">
+        📚 Subjects
+    </button>
+
+    <button class="nav-btn" onclick="showPage('planner', this)">
+        ✅ Planner
+    </button>
+
+    <button class="nav-btn" onclick="showPage('quiz', this)">
+        🧠 Quiz
+    </button>
+
+    <button class="nav-btn" onclick="showPage('timer', this)">
+        ⏱️ Focus Timer
+    </button>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+    <div class="topbar">
+
+        <div class="welcome">
+
+            <h1 id="pageTitle">
+                Good morning 👋
+            </h1>
+
+            <p>
+                Let's make today productive.
+            </p>
+
+        </div>
+
+        <div>
+
+            <button
+                class="icon-btn mobile-menu"
+                onclick="toggleMenu()"
+            >
+                ☰
+            </button>
+
+            <button
+                class="icon-btn"
+                onclick="toggleTheme()"
+                id="themeButton"
+            >
+                🌙
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- DASHBOARD -->
+
+    <section
+        id="dashboard"
+        class="page active"
+    >
+
+        <div class="grid">
+
+            <div class="card stat">
+
+                <div class="stat-title">
+                    Tasks Completed
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="completedCount"
+                >
+                    0
+                </div>
+
+                <div class="stat-small">
+                    Keep going!
+                </div>
+
+            </div>
+
+
+            <div class="card stat">
+
+                <div class="stat-title">
+                    Total Tasks
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="totalCount"
+                >
+                    0
+                </div>
+
+                <div class="stat-small">
+                    Your workload
+                </div>
+
+            </div>
+
+
+            <div class="card stat">
+
+                <div class="stat-title">
+                    Study Progress
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="progressPercent"
+                >
+                    0%
+                </div>
+
+                <div class="stat-small">
+                    Overall
+                </div>
+
+            </div>
+
+
+            <div class="card stat">
+
+                <div class="stat-title">
+                    Focus Sessions
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="focusCount"
+                >
+                    0
+                </div>
+
+                <div class="stat-small">
+                    Completed
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <div class="section-title">
+
+                <h2>
+                    Today's Tasks
+                </h2>
+
+                <button
+                    class="primary"
+                    onclick="showPageByName('planner')"
+                >
+                    + Add Task
+                </button>
+
+            </div>
+
+
+            <div
+                class="card"
+                id="dashboardTasks"
+            ></div>
+
+        </div>
+
+
+        <div class="section">
+
+            <div class="section-title">
+
+                <h2>
+                    Overall Progress
+                </h2>
+
+            </div>
+
+            <div class="card">
+
+                <strong id="progressText">
+                    0% completed
+                </strong>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        id="mainProgress"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SUBJECTS -->
+
+    <section
+        id="subjects"
+        class="page"
+    >
+
+        <div class="section-title">
+
+            <h2>
+                📚 My Subjects
+            </h2>
+
+            <button
+                class="primary"
+                onclick="addSubject()"
+            >
+                + Add Subject
+            </button>
+
+        </div>
+
+
+        <div
+            class="subject-grid"
+            id="subjectGrid"
+        ></div>
+
+    </section>
+
+
+    <!-- PLANNER -->
+
+    <section
+        id="planner"
+        class="page"
+    >
+
+        <div class="section-title">
+
+            <h2>
+                ✅ Study Planner
+            </h2>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="form">
+
+                <input
+                    id="taskInput"
+                    placeholder="What do you need to study?"
+                >
+
+                <input
+                    id="taskSubject"
+                    placeholder="Subject e.g. Physics"
+                >
+
+                <button
+                    class="primary"
+                    onclick="addTask()"
+                >
+                    Add Task
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <div
+                class="card"
+                id="plannerTasks"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUIZ -->
+
+    <section
+        id="quiz"
+        class="page"
+    >
+
+        <div class="section-title">
+
+            <h2>
+                🧠 Quick Quiz
+            </h2>
+
+        </div>
+
+
+        <div
+            class="card quiz-box"
+            id="quizBox"
+        >
+
+            <h2>
+                Test your knowledge
+            </h2>
+
+            <p
+                style="
+                color:var(--muted);
+                margin:12px 0 20px;
+                "
+            >
+                Choose a subject and start a quick
+                built-in quiz.
+            </p>
+
+
+            <select id="quizSubject">
+
+                <option value="General Knowledge">
+                    General Knowledge
+                </option>
+
+                <option value="Computer Science">
+                    Computer Science
+                </option>
+
+                <option value="Mathematics">
+                    Mathematics
+                </option>
+
+                <option value="Physics">
+                    Physics
+                </option>
+
+                <option value="English">
+                    English
+                </option>
+
+            </select>
+
+
+            <button
+                class="primary"
+                style="margin-top:15px"
+                onclick="startQuiz()"
+            >
+                Start Quiz 🚀
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- TIMER -->
+
+    <section
+        id="timer"
+        class="page"
+    >
+
+        <div class="card timer">
+
+            <h2>
+                ⏱️ Focus Mode
+            </h2>
+
+            <div class="timer-mode">
+                25 minute study session
+            </div>
+
+
+            <div
+                class="timer-display"
+                id="timerDisplay"
+            >
+                25:00
+            </div>
+
+
+            <button
+                class="primary"
+                onclick="startTimer()"
+                id="timerButton"
+            >
+                ▶ Start
+            </button>
+
+
+            <button
+                class="secondary"
+                onclick="resetTimer()"
+            >
+                ↻ Reset
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   DATA
+===================================================== */
+
+let data = JSON.parse(
+    localStorage.getItem("studyflow")
+) || {
+
+    tasks: [],
+
+    subjects: [
+        {
+            name: "Mathematics",
+            icon: "📐",
+            progress: 0
+        },
+
+        {
+            name: "Physics",
+            icon: "⚛️",
+            progress: 0
+        },
+
+        {
+            name: "Computer Science",
+            icon: "💻",
+            progress: 0
+        }
+    ],
+
+    focusSessions: 0,
+
+    dark: true
+
+};
+
+
+/* =====================================================
+   SAVE
+===================================================== */
+
+function save() {
+
+    localStorage.setItem(
+        "studyflow",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function showPage(page, button) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(
+            p => p.classList.remove("active")
+        );
+
+
+    document
+        .getElementById(page)
+        .classList.add("active");
+
+
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(
+            b => b.classList.remove("active")
+        );
+
+
+    if (button) {
+
+        button.classList.add("active");
+
+    }
+
+
+    const titles = {
+
+        dashboard: "Good morning 👋",
+
+        subjects: "Your Subjects 📚",
+
+        planner: "Study Planner ✅",
+
+        quiz: "Quiz Center 🧠",
+
+        timer: "Focus Mode ⏱️"
+
+    };
+
+
+    document.getElementById(
+        "pageTitle"
+    ).textContent =
+        titles[page];
+
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+
+    renderAll();
+
+}
+
+
+function showPageByName(page) {
+
+    const button =
+        [...document.querySelectorAll(".nav-btn")]
+        .find(
+            b => b.textContent
+                .toLowerCase()
+                .includes(page)
+        );
+
+
+    showPage(page, button);
+
+}
+
+
+function toggleMenu() {
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+function toggleTheme() {
+
+    data.dark = !data.dark;
+
+    document.body.classList.toggle(
+        "light",
+        !data.dark
+    );
+
+    document.getElementById(
+        "themeButton"
+    ).textContent =
+        data.dark ? "🌙" : "☀️";
+
+    save();
+
+}
+
+
+/* =====================================================
+   TASKS
+===================================================== */
+
+function addTask() {
+
+    const input =
+        document.getElementById(
+            "taskInput"
+        );
+
+    const subject =
+        document.getElementById(
+            "taskSubject"
+        );
+
+
+    const text =
+        input.value.trim();
+
+
+    if (!text) {
+
+        alert("Enter a task first.");
+
+        return;
+
+    }
+
+
+    data.tasks.push({
+
+        id: Date.now(),
+
+        text: text,
+
+        subject:
+            subject.value.trim() ||
+            "General",
+
+        completed: false
+
+    });
+
+
+    input.value = "";
+
+    subject.value = "";
+
+    save();
+
+    renderAll();
+
+}
+
+
+function toggleTask(id) {
+
+    const task =
+        data.tasks.find(
+            t => t.id === id
+        );
+
+
+    if (task) {
+
+        task.completed =
+            !task.completed;
+
+    }
+
+
+    save();
+
+    renderAll();
+
+}
+
+
+function deleteTask(id) {
+
+    data.tasks =
+        data.tasks.filter(
+            t => t.id !== id
+        );
+
+
+    save();
+
+    renderAll();
+
+}
+
+
+/* =====================================================
+   RENDER TASKS
+===================================================== */
+
+function taskHTML(task) {
+
+    return `
+
+        <div class="task ${
+            task.completed
+                ? "completed"
+                : ""
+        }">
+
+            <input
+                type="checkbox"
+                class="task-check"
+                ${
+                    task.completed
+                        ? "checked"
+                        : ""
+                }
+                onchange="
+                    toggleTask(${task.id})
+                "
+            >
+
+            <span>
+                ${escapeHTML(task.text)}
+            </span>
+
+            <span class="task-subject">
+                ${escapeHTML(task.subject)}
+            </span>
+
+            <button
+                class="secondary"
+                onclick="
+                    deleteTask(${task.id})
+                "
+            >
+                ✕
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+function renderTasks() {
+
+    const dashboard =
+        document.getElementById(
+            "dashboardTasks"
+        );
+
+    const planner =
+        document.getElementById(
+            "plannerTasks"
+        );
+
+
+    if (data.tasks.length === 0) {
+
+        const empty =
+            `<div class="empty">
+                No tasks yet. Add one to get started! 🚀
+             </div>`;
+
+        dashboard.innerHTML = empty;
+
+        planner.innerHTML = empty;
+
+        return;
+
+    }
+
+
+    const html =
+        data.tasks
+        .map(taskHTML)
+        .join("");
+
+
+    dashboard.innerHTML =
+        html;
+
+
+    planner.innerHTML =
+        html;
+
+}
+
+
+/* =====================================================
+   SUBJECTS
+===================================================== */
+
+function addSubject() {
+
+    const name =
+        prompt(
+            "Enter subject name:"
+        );
+
+
+    if (!name || !name.trim()) {
+
+        return;
+
+    }
+
+
+    data.subjects.push({
+
+        name: name.trim(),
+
+        icon: "📘",
+
+        progress: 0
+
+    });
+
+
+    save();
+
+    renderSubjects();
+
+}
+
+
+function renderSubjects() {
+
+    const grid =
+        document.getElementById(
+            "subjectGrid"
+        );
+
+
+    grid.innerHTML =
+        data.subjects
+        .map(
+            (subject, index) => `
+
+            <div class="subject-card">
+
+                <div class="subject-icon">
+                    ${subject.icon}
+                </div>
+
+                <div class="subject-name">
+                    ${escapeHTML(
+                        subject.name
+                    )}
+                </div>
+
+                <div class="subject-progress">
+
+                    ${subject.progress}% complete
+
+                </div>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="
+                            width:
+                            ${subject.progress}%
+                        "
+                    ></div>
+
+                </div>
+
+                <button
+                    class="secondary"
+                    style="margin-top:15px"
+                    onclick="
+                        changeSubjectProgress(
+                            ${index}
+                        )
+                    "
+                >
+                    Update Progress
+                </button>
+
+            </div>
+
+        `
+        )
+        .join("");
+
+}
+
+
+function changeSubjectProgress(index) {
+
+    const value =
+        prompt(
+            "Enter progress from 0 to 100:",
+            data.subjects[index].progress
+        );
+
+
+    const number =
+        Number(value);
+
+
+    if (
+        Number.isFinite(number) &&
+        number >= 0 &&
+        number <= 100
+    ) {
+
+        data.subjects[index].progress =
+            number;
+
+        save();
+
+        renderSubjects();
+
+    }
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function renderDashboard() {
+
+    const total =
+        data.tasks.length;
+
+
+    const completed =
+        data.tasks.filter(
+            t => t.completed
+        ).length;
+
+
+    const percentage =
+        total === 0
+            ? 0
+            : Math.round(
+                completed /
+                total *
+                100
+            );
+
+
+    document.getElementById(
+        "completedCount"
+    ).textContent =
+        completed;
+
+
+    document.getElementById(
+        "totalCount"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "progressPercent"
+    ).textContent =
+        percentage + "%";
+
+
+    document.getElementById(
+        "focusCount"
+    ).textContent =
+        data.focusSessions;
+
+
+    document.getElementById(
+        "progressText"
+    ).textContent =
+        percentage +
+        "% completed";
+
+
+    document.getElementById(
+        "mainProgress"
+    ).style.width =
+        percentage + "%";
+
+}
+
+
+/* =====================================================
+   QUIZ DATA
+===================================================== */
+
+const quizzes = {
+
+    "General Knowledge": [
+
+        {
+            q: "What is the largest planet in our solar system?",
+            options: [
+                "Earth",
+                "Mars",
+                "Jupiter",
+                "Venus"
+            ],
+            answer: 2
+        },
+
+        {
+            q: "How many continents are there?",
+            options: [
+                "5",
+                "6",
+                "7",
+                "8"
+            ],
+            answer: 2
+        },
+
+        {
+            q: "Which ocean is the largest?",
+            options: [
+                "Atlantic",
+                "Pacific",
+                "Indian",
+                "Arctic"
+            ],
+            answer: 1
+        },
+
+        {
+            q: "What gas do plants absorb?",
+            options: [
+                "Oxygen",
+                "Nitrogen",
+                "Carbon dioxide",
+                "Hydrogen"
+            ],
+            answer: 2
+        }
+
+    ],
+
+
+    "Computer Science": [
+
+        {
+            q: "What does CPU stand for?",
+            options: [
+                "Central Processing Unit",
+                "Computer Personal Unit",
+                "Central Program Utility",
+                "Control Processing User"
+            ],
+            answer: 0
+        },
+
+        {
+            q: "Which language is commonly used for web page structure?",
+            options: [
+                "Python",
+                "HTML",
+                "SQL",
+                "C++"
+            ],
+            answer: 1
+        },
+
+        {
+            q: "What does RAM stand for?",
+            options: [
+                "Random Access Memory",
+                "Read Access Module",
+                "Rapid Application Memory",
+                "Remote Access Machine"
+            ],
+            answer: 0
+        }
+
+    ],
+
+
+    "Mathematics": [
+
+        {
+            q: "What is 12 × 8?",
+            options: [
+                "86",
+                "96",
+                "108",
+                "112"
+            ],
+            answer: 1
+        },
+
+        {
+            q: "What is the square root of 144?",
+            options: [
+                "10",
+                "11",
+                "12",
+                "14"
+            ],
+            answer: 2
+        },
+
+        {
+            q: "What is 25% of 200?",
+            options: [
+                "25",
+                "40",
+                "50",
+                "75"
+            ],
+            answer: 2
+        }
+
+    ],
+
+
+    "Physics": [
+
+        {
+            q: "What is the SI unit of force?",
+            options: [
+                "Joule",
+                "Watt",
+                "Newton",
+                "Pascal"
+            ],
+            answer: 2
+        },
+
+        {
+            q: "What is the approximate acceleration due to gravity on Earth?",
+            options: [
+                "4.9 m/s²",
+                "9.8 m/s²",
+                "15 m/s²",
+                "20 m/s²"
+            ],
+            answer: 1
+        },
+
+        {
+            q: "Which quantity has both magnitude and direction?",
+            options: [
+                "Mass",
+                "Temperature",
+                "Speed",
+                "Velocity"
+            ],
+            answer: 3
+        }
+
+    ],
+
+
+    "English": [
+
+        {
+            q: "Which word is a noun?",
+            options: [
+                "Quickly",
+                "Beautiful",
+                "Teacher",
+                "Run"
+            ],
+            answer: 2
+        },
+
+        {
+            q: "What is the opposite of 'ancient'?",
+            options: [
+                "Old",
+                "Modern",
+                "Historic",
+                "Past"
+            ],
+            answer: 1
+        },
+
+        {
+            q: "Which sentence is grammatically correct?",
+            options: [
+                "He go to school.",
+                "He going school.",
+                "He goes to school.",
+                "He gone school."
+            ],
+            answer: 2
+        }
+
+    ]
+
+};
+
+
+let currentQuestions = [];
+
+let currentQuestion = 0;
+
+let quizScore = 0;
+
+
+/* =====================================================
+   START QUIZ
+===================================================== */
+
+function startQuiz() {
+
+    const subject =
+        document.getElementById(
+            "quizSubject"
+        ).value;
+
+
+    currentQuestions =
+        [...quizzes[subject]]
+        .sort(
+            () => Math.random() - .5
+        );
+
+
+    currentQuestion = 0;
+
+    quizScore = 0;
+
+    showQuestion();
+
+}
+
+
+/* =====================================================
+   SHOW QUESTION
+===================================================== */
+
+function showQuestion() {
+
+    const box =
+        document.getElementById(
+            "quizBox"
+        );
+
+
+    if (
+        currentQuestion >=
+        currentQuestions.length
+    ) {
+
+        finishQuiz();
+
+        return;
+
+    }
+
+
+    const question =
+        currentQuestions[
+            currentQuestion
+        ];
+
+
+    box.innerHTML = `
+
+        <div
+            style="
+            color:var(--muted);
+            margin-bottom:15px;
+            "
+        >
+            Question
+            ${currentQuestion + 1}
+            /
+            ${currentQuestions.length}
+        </div>
+
+        <div class="quiz-question">
+
+            ${escapeHTML(
+                question.q
+            )}
+
+        </div>
+
+        <div>
+
+            ${question.options
+                .map(
+                    (option, index) => `
+
+                    <button
+                        class="option"
+                        onclick="
+                            answerQuestion(
+                                ${index}
+                            )
+                        "
+                    >
+                        ${String.fromCharCode(
+                            65 + index
+                        )}.
+                        ${escapeHTML(
+                            option
+                        )}
+                    </button>
+
+                `
+                )
+                .join("")}
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ANSWER
+===================================================== */
+
+function answerQuestion(selected) {
+
+    const question =
+        currentQuestions[
+            currentQuestion
+        ];
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".option"
+        );
+
+
+    buttons.forEach(
+        b => b.disabled = true
+    );
+
+
+    if (
+        selected ===
+        question.answer
+    ) {
+
+        buttons[selected]
+            .classList.add(
+                "correct"
+            );
+
+        quizScore++;
+
+    } else {
+
+        buttons[selected]
+            .classList.add(
+                "wrong"
+            );
+
+        buttons[question.answer]
+            .classList.add(
+                "correct"
+            );
+
+    }
+
+
+    setTimeout(
+        () => {
+
+            currentQuestion++;
+
+            showQuestion();
+
+        },
+        700
+    );
+
+}
+
+
+/* =====================================================
+   QUIZ RESULT
+===================================================== */
+
+function finishQuiz() {
+
+    const total =
+        currentQuestions.length;
+
+
+    const percentage =
+        Math.round(
+            quizScore /
+            total *
+            100
+        );
+
+
+    data.focusSessions++;
+
+    save();
+
+    document.getElementById(
+        "quizBox"
+    ).innerHTML = `
+
+        <div class="quiz-result">
+
+            <div class="score-big">
+                ${percentage}%
+            </div>
+
+            <h2>
+                ${quizScore}
+                /
+                ${total}
+            </h2>
+
+            <p
+                style="
+                color:var(--muted);
+                margin:12px;
+                "
+            >
+                ${
+                    percentage >= 80
+                        ? "Excellent work! 🔥"
+                        : percentage >= 50
+                        ? "Good job! Keep practicing! 💪"
+                        : "Keep learning and try again! 📚"
+                }
+            </p>
+
+            <button
+                class="primary"
+                onclick="startQuiz()"
+            >
+                Try Again
+            </button>
+
+        </div>
+
+    `;
+
+
+    renderDashboard();
+
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+let timerSeconds = 25 * 60;
+
+let timerInterval = null;
+
+let timerRunning = false;
+
+
+function updateTimerDisplay() {
+
+    const minutes =
+        Math.floor(
+            timerSeconds / 60
+        );
+
+    const seconds =
+        timerSeconds % 60;
+
+
+    document.getElementById(
+        "timerDisplay"
+    ).textContent =
+
+        String(minutes).padStart(
+            2,
+            "0"
+        ) +
+
+        ":" +
+
+        String(seconds).padStart(
+            2,
+            "0"
+        );
+
+}
+
+
+function startTimer() {
+
+    if (timerRunning) {
+
+        clearInterval(
+            timerInterval
+        );
+
+        timerRunning = false;
+
+        document.getElementById(
+            "timerButton"
+        ).textContent =
+            "▶ Resume";
+
+        return;
+
+    }
+
+
+    timerRunning = true;
+
+
+    document.getElementById(
+        "timerButton"
+    ).textContent =
+        "⏸ Pause";
+
+
+    timerInterval =
+        setInterval(
+            () => {
+
+                timerSeconds--;
+
+                updateTimerDisplay();
+
+
+                if (
+                    timerSeconds <= 0
+                ) {
+
+                    clearInterval(
+                        timerInterval
+                    );
+
+                    timerRunning =
+                        false;
+
+                    data.focusSessions++;
+
+                    save();
+
+                    alert(
+                        "🎉 Focus session complete!"
+                    );
+
+                    resetTimer();
+
+                    renderDashboard();
+
+                }
+
+            },
+            1000
+        );
+
+}
+
+
+function resetTimer() {
+
+    clearInterval(
+        timerInterval
+    );
+
+    timerRunning = false;
+
+    timerSeconds =
+        25 * 60;
+
+    updateTimerDisplay();
+
+    document.getElementById(
+        "timerButton"
+    ).textContent =
+        "▶ Start";
+
+}
+
+
+/* =====================================================
+   SECURITY
+===================================================== */
+
+function escapeHTML(value) {
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   RENDER EVERYTHING
+===================================================== */
+
+function renderAll() {
+
+    renderTasks();
+
+    renderSubjects();
+
+    renderDashboard();
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+document.body.classList.toggle(
+    "light",
+    !data.dark
+);
+
+
+document.getElementById(
+    "themeButton"
+).textContent =
+    data.dark
+        ? "🌙"
+        : "☀️";
+
+
+updateTimerDisplay();
+
+renderAll();
+
+</script>
+
+</body>
+</html>
