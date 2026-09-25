@@ -3,15 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="jvkLmCcRs4y2i--1vymvVdkhamas6slUSVvV5Aug8ZY" />
-<title>StudyFlow AI</title>
+<title>StudyFlow Pakistan</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
     --bg: #090b12;
@@ -35,6 +30,8 @@ body.light {
     --border: #dce1eb;
 }
 
+html { scroll-behavior: smooth; }
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: var(--bg);
@@ -43,17 +40,8 @@ body {
     transition: .25s;
 }
 
-button,
-input,
-select {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-/* SIDEBAR */
+button, input, select { font: inherit; }
+button { cursor: pointer; }
 
 .sidebar {
     position: fixed;
@@ -73,9 +61,7 @@ button {
     padding: 0 12px 30px;
 }
 
-.logo span {
-    color: var(--accent2);
-}
+.logo span { color: var(--accent2); }
 
 .nav-btn {
     width: 100%;
@@ -89,17 +75,12 @@ button {
     transition: .2s;
 }
 
-.nav-btn:hover,
-.nav-btn.active {
+.nav-btn:hover, .nav-btn.active {
     background: var(--panel2);
     color: var(--text);
 }
 
-.nav-btn.active {
-    border-left: 3px solid var(--accent);
-}
-
-/* MAIN */
+.nav-btn.active { border-left: 3px solid var(--accent); }
 
 .main {
     margin-left: 245px;
@@ -114,14 +95,8 @@ button {
     margin-bottom: 28px;
 }
 
-.welcome h1 {
-    font-size: 30px;
-}
-
-.welcome p {
-    color: var(--muted);
-    margin-top: 7px;
-}
+.welcome h1 { font-size: 30px; }
+.welcome p { color: var(--muted); margin-top: 7px; }
 
 .icon-btn {
     width: 44px;
@@ -132,17 +107,13 @@ button {
     color: var(--text);
 }
 
-/* PAGES */
+.page { display: none; }
+.page.active { display: block; animation: pageIn .4s ease; }
 
-.page {
-    display: none;
+@keyframes pageIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
-.page.active {
-    display: block;
-}
-
-/* CARDS */
 
 .card {
     background: var(--panel);
@@ -151,36 +122,23 @@ button {
     padding: 22px;
 }
 
+.card:hover, .subject-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
 }
 
-.stat {
-    min-height: 130px;
-}
+.stat { min-height: 130px; transition: .25s; }
+.stat-title { color: var(--muted); font-size: 14px; }
+.stat-number { font-size: 32px; font-weight: 800; margin-top: 15px; }
+.stat-small { color: var(--success); margin-top: 8px; font-size: 13px; }
 
-.stat-title {
-    color: var(--muted);
-    font-size: 14px;
-}
-
-.stat-number {
-    font-size: 32px;
-    font-weight: 800;
-    margin-top: 15px;
-}
-
-.stat-small {
-    color: var(--success);
-    margin-top: 8px;
-    font-size: 13px;
-}
-
-.section {
-    margin-top: 22px;
-}
+.section { margin-top: 22px; }
 
 .section-title {
     display: flex;
@@ -189,11 +147,7 @@ button {
     margin-bottom: 14px;
 }
 
-.section-title h2 {
-    font-size: 20px;
-}
-
-/* BUTTONS */
+.section-title h2 { font-size: 20px; }
 
 .primary {
     background: var(--accent);
@@ -204,9 +158,7 @@ button {
     font-weight: 700;
 }
 
-.primary:hover {
-    opacity: .85;
-}
+.primary:hover { opacity: .85; }
 
 .secondary {
     background: var(--panel2);
@@ -216,8 +168,6 @@ button {
     border-radius: 10px;
 }
 
-/* TASKS */
-
 .task {
     display: flex;
     align-items: center;
@@ -226,16 +176,8 @@ button {
     border-bottom: 1px solid var(--border);
 }
 
-.task:last-child {
-    border-bottom: 0;
-}
-
-.task-check {
-    width: 21px;
-    height: 21px;
-    cursor: pointer;
-    accent-color: var(--accent);
-}
+.task:last-child { border-bottom: 0; }
+.task-check { width: 21px; height: 21px; cursor: pointer; accent-color: var(--accent); }
 
 .task.completed span {
     text-decoration: line-through;
@@ -247,8 +189,6 @@ button {
     color: var(--muted);
     font-size: 13px;
 }
-
-/* PROGRESS */
 
 .progress {
     height: 9px;
@@ -262,10 +202,8 @@ button {
     height: 100%;
     background: linear-gradient(90deg, var(--accent), var(--accent2));
     width: 0;
-    transition: .4s;
+    transition: width .5s ease;
 }
-
-/* SUBJECTS */
 
 .subject-grid {
     display: grid;
@@ -278,33 +216,16 @@ button {
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 20px;
+    transition: .25s;
 }
 
-.subject-icon {
-    font-size: 30px;
-}
+.subject-icon { font-size: 30px; }
+.subject-name { font-weight: 700; margin-top: 12px; }
+.subject-progress { color: var(--muted); font-size: 13px; margin-top: 8px; }
 
-.subject-name {
-    font-weight: 700;
-    margin-top: 12px;
-}
+.form { display: grid; gap: 12px; max-width: 550px; }
 
-.subject-progress {
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 8px;
-}
-
-/* INPUTS */
-
-.form {
-    display: grid;
-    gap: 12px;
-    max-width: 550px;
-}
-
-input,
-select {
+input, select {
     width: 100%;
     padding: 12px;
     border-radius: 10px;
@@ -314,22 +235,10 @@ select {
     outline: none;
 }
 
-input:focus,
-select:focus {
-    border-color: var(--accent);
-}
+input:focus, select:focus { border-color: var(--accent); }
 
-/* QUIZ */
-
-.quiz-box {
-    max-width: 800px;
-}
-
-.quiz-question {
-    font-size: 20px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
+.quiz-box { max-width: 800px; }
+.quiz-question { font-size: 20px; line-height: 1.5; margin-bottom: 20px; }
 
 .option {
     display: block;
@@ -343,1759 +252,905 @@ select:focus {
     text-align: left;
 }
 
-.option:hover {
-    border-color: var(--accent);
-}
+.option:hover { border-color: var(--accent); }
+.option.correct { background: rgba(54,211,153,.2); border-color: var(--success); }
+.option.wrong { background: rgba(255,92,108,.2); border-color: var(--danger); }
 
-.option.correct {
-    background: rgba(54,211,153,.2);
-    border-color: var(--success);
-}
-
-.option.wrong {
-    background: rgba(255,92,108,.2);
-    border-color: var(--danger);
-}
-
-.quiz-result {
-    text-align: center;
-    padding: 30px;
-}
-
-.score-big {
-    font-size: 50px;
-    font-weight: 900;
-}
-
-/* TIMER */
-
-.timer {
-    text-align: center;
-    max-width: 700px;
-    margin: auto;
-}
-
-.timer-display {
-    font-size: 90px;
-    font-weight: 800;
-    margin: 40px 0;
-}
-
-.timer-mode {
+.explanation {
     color: var(--muted);
-    margin-top: 15px;
+    margin-top: 12px;
+    line-height: 1.5;
 }
 
-/* EMPTY */
+.quiz-result { text-align: center; padding: 30px; }
+.score-big { font-size: 50px; font-weight: 900; }
 
-.empty {
-    color: var(--muted);
-    text-align: center;
-    padding: 30px;
+.timer { text-align: center; max-width: 700px; margin: auto; }
+.timer-display { font-size: 90px; font-weight: 800; margin: 40px 0; }
+.timer-mode { color: var(--muted); margin-top: 15px; }
+
+.empty { color: var(--muted); text-align: center; padding: 30px; }
+
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .65s ease, transform .65s ease;
 }
 
-/* MOBILE */
-
-.mobile-menu {
-    display: none;
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
+
+.mobile-menu { display: none; }
 
 @media(max-width: 900px) {
-
     .sidebar {
         transform: translateX(-100%);
         transition: .3s;
     }
 
-    .sidebar.open {
-        transform: translateX(0);
-    }
-
-    .main {
-        margin-left: 0;
-        padding: 18px;
-    }
-
-    .mobile-menu {
-        display: block;
-    }
-
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .subject-grid {
-        grid-template-columns: 1fr;
-    }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 18px; }
+    .mobile-menu { display: inline-block; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .subject-grid { grid-template-columns: 1fr; }
 }
 
 @media(max-width: 550px) {
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    .timer-display {
-        font-size: 60px;
-    }
-
-    .welcome h1 {
-        font-size: 23px;
-    }
+    .grid { grid-template-columns: 1fr; }
+    .timer-display { font-size: 60px; }
+    .welcome h1 { font-size: 23px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-
 <aside class="sidebar" id="sidebar">
+    <div class="logo">📚 Study<span>Flow</span></div>
 
-    <div class="logo">
-        📚 Study<span>Flow</span>
-    </div>
-
-    <button class="nav-btn active" onclick="showPage('dashboard', this)">
-        🏠 Dashboard
-    </button>
-
-    <button class="nav-btn" onclick="showPage('subjects', this)">
-        📚 Subjects
-    </button>
-
-    <button class="nav-btn" onclick="showPage('planner', this)">
-        ✅ Planner
-    </button>
-
-    <button class="nav-btn" onclick="showPage('quiz', this)">
-        🧠 Quiz
-    </button>
-
-    <button class="nav-btn" onclick="showPage('timer', this)">
-        ⏱️ Focus Timer
-    </button>
-
+    <button class="nav-btn active" onclick="showPage('dashboard', this)">🏠 Dashboard</button>
+    <button class="nav-btn" onclick="showPage('subjects', this)">📚 Subjects</button>
+    <button class="nav-btn" onclick="showPage('planner', this)">✅ Planner</button>
+    <button class="nav-btn" onclick="showPage('quiz', this)">🧠 Pakistan Quiz</button>
+    <button class="nav-btn" onclick="showPage('timer', this)">⏱️ Focus Timer</button>
 </aside>
 
-
-<!-- MAIN -->
-
 <main class="main">
-
     <div class="topbar">
-
         <div class="welcome">
-
-            <h1 id="pageTitle">
-                Good morning 👋
-            </h1>
-
-            <p>
-                Let's make today productive.
-            </p>
-
+            <h1 id="pageTitle">Good morning 👋</h1>
+            <p>Study smarter for your Pakistan board exams.</p>
         </div>
 
         <div>
-
-            <button
-                class="icon-btn mobile-menu"
-                onclick="toggleMenu()"
-            >
-                ☰
-            </button>
-
-            <button
-                class="icon-btn"
-                onclick="toggleTheme()"
-                id="themeButton"
-            >
-                🌙
-            </button>
-
+            <button class="icon-btn mobile-menu" onclick="toggleMenu()">☰</button>
+            <button class="icon-btn" onclick="toggleTheme()" id="themeButton">🌙</button>
         </div>
-
     </div>
 
-
-    <!-- DASHBOARD -->
-
-    <section
-        id="dashboard"
-        class="page active"
-    >
-
+    <section id="dashboard" class="page active">
         <div class="grid">
-
             <div class="card stat">
-
-                <div class="stat-title">
-                    Tasks Completed
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="completedCount"
-                >
-                    0
-                </div>
-
-                <div class="stat-small">
-                    Keep going!
-                </div>
-
+                <div class="stat-title">Tasks Completed</div>
+                <div class="stat-number" id="completedCount">0</div>
+                <div class="stat-small">Keep going!</div>
             </div>
 
-
             <div class="card stat">
-
-                <div class="stat-title">
-                    Total Tasks
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="totalCount"
-                >
-                    0
-                </div>
-
-                <div class="stat-small">
-                    Your workload
-                </div>
-
+                <div class="stat-title">Total Tasks</div>
+                <div class="stat-number" id="totalCount">0</div>
+                <div class="stat-small">Your workload</div>
             </div>
 
-
             <div class="card stat">
-
-                <div class="stat-title">
-                    Study Progress
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="progressPercent"
-                >
-                    0%
-                </div>
-
-                <div class="stat-small">
-                    Overall
-                </div>
-
+                <div class="stat-title">Study Progress</div>
+                <div class="stat-number" id="progressPercent">0%</div>
+                <div class="stat-small">Overall</div>
             </div>
 
-
             <div class="card stat">
-
-                <div class="stat-title">
-                    Focus Sessions
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="focusCount"
-                >
-                    0
-                </div>
-
-                <div class="stat-small">
-                    Completed
-                </div>
-
+                <div class="stat-title">Focus Sessions</div>
+                <div class="stat-number" id="focusCount">0</div>
+                <div class="stat-small">Completed</div>
             </div>
-
         </div>
 
-
         <div class="section">
-
             <div class="section-title">
-
-                <h2>
-                    Today's Tasks
-                </h2>
-
-                <button
-                    class="primary"
-                    onclick="showPageByName('planner')"
-                >
-                    + Add Task
-                </button>
-
+                <h2>Today's Tasks</h2>
+                <button class="primary" onclick="showPageByName('planner')">+ Add Task</button>
             </div>
-
-
-            <div
-                class="card"
-                id="dashboardTasks"
-            ></div>
-
+            <div class="card" id="dashboardTasks"></div>
         </div>
 
-
         <div class="section">
-
-            <div class="section-title">
-
-                <h2>
-                    Overall Progress
-                </h2>
-
-            </div>
-
+            <div class="section-title"><h2>Overall Progress</h2></div>
             <div class="card">
-
-                <strong id="progressText">
-                    0% completed
-                </strong>
-
-                <div class="progress">
-
-                    <div
-                        class="progress-bar"
-                        id="mainProgress"
-                    ></div>
-
-                </div>
-
+                <strong id="progressText">0% completed</strong>
+                <div class="progress"><div class="progress-bar" id="mainProgress"></div></div>
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- SUBJECTS -->
-
-    <section
-        id="subjects"
-        class="page"
-    >
-
+    <section id="subjects" class="page">
         <div class="section-title">
-
-            <h2>
-                📚 My Subjects
-            </h2>
-
-            <button
-                class="primary"
-                onclick="addSubject()"
-            >
-                + Add Subject
-            </button>
-
+            <h2>📚 My Subjects</h2>
+            <button class="primary" onclick="addSubject()">+ Add Subject</button>
         </div>
-
-
-        <div
-            class="subject-grid"
-            id="subjectGrid"
-        ></div>
-
+        <div class="subject-grid" id="subjectGrid"></div>
     </section>
 
-
-    <!-- PLANNER -->
-
-    <section
-        id="planner"
-        class="page"
-    >
-
-        <div class="section-title">
-
-            <h2>
-                ✅ Study Planner
-            </h2>
-
-        </div>
-
+    <section id="planner" class="page">
+        <div class="section-title"><h2>✅ Study Planner</h2></div>
 
         <div class="card">
-
             <div class="form">
-
-                <input
-                    id="taskInput"
-                    placeholder="What do you need to study?"
-                >
-
-                <input
-                    id="taskSubject"
-                    placeholder="Subject e.g. Physics"
-                >
-
-                <button
-                    class="primary"
-                    onclick="addTask()"
-                >
-                    Add Task
-                </button>
-
+                <input id="taskInput" placeholder="What do you need to study?">
+                <input id="taskSubject" placeholder="Subject, e.g. Physics">
+                <button class="primary" onclick="addTask()">Add Task</button>
             </div>
-
         </div>
-
 
         <div class="section">
-
-            <div
-                class="card"
-                id="plannerTasks"
-            ></div>
-
+            <div class="card" id="plannerTasks"></div>
         </div>
-
     </section>
 
+    <section id="quiz" class="page">
+        <div class="section-title"><h2>🧠 Pakistan Board Quiz</h2></div>
 
-    <!-- QUIZ -->
-
-    <section
-        id="quiz"
-        class="page"
-    >
-
-        <div class="section-title">
-
-            <h2>
-                🧠 Quick Quiz
-            </h2>
-
-        </div>
-
-
-        <div
-            class="card quiz-box"
-            id="quizBox"
-        >
-
-            <h2>
-                Test your knowledge
-            </h2>
-
-            <p
-                style="
-                color:var(--muted);
-                margin:12px 0 20px;
-                "
-            >
-                Choose a subject and start a quick
-                built-in quiz.
+        <div class="card quiz-box" id="quizBox">
+            <h2>Chapter MCQ Test</h2>
+            <p style="color:var(--muted); margin:12px 0 20px;">
+                Choose your class, subject, and chapter.
             </p>
 
-
-            <select id="quizSubject">
-
-                <option value="General Knowledge">
-                    General Knowledge
-                </option>
-
-                <option value="Computer Science">
-                    Computer Science
-                </option>
-
-                <option value="Mathematics">
-                    Mathematics
-                </option>
-
-                <option value="Physics">
-                    Physics
-                </option>
-
-                <option value="English">
-                    English
-                </option>
-
+            <select id="quizClass" onchange="loadSubjects()">
+                <option value="">Select class</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+                <option value="11">Class 11 — 1st Year</option>
+                <option value="12">Class 12 — 2nd Year</option>
             </select>
 
+            <select id="quizSubject" onchange="loadChapters()" style="margin-top:12px">
+                <option value="">Select subject</option>
+            </select>
 
-            <button
-                class="primary"
-                style="margin-top:15px"
-                onclick="startQuiz()"
-            >
-                Start Quiz 🚀
+            <select id="quizChapter" style="margin-top:12px">
+                <option value="">Select chapter</option>
+            </select>
+
+            <button class="primary" style="margin-top:15px" onclick="startChapterQuiz()">
+                Start Chapter Test
             </button>
 
-        </div>
+            <button class="secondary" style="margin-top:15px" onclick="askAI()">
+                Generate AI MCQs
+            </button>
 
+            <p style="color:var(--muted); font-size:12px; margin-top:14px;">
+                AI questions should be checked against your school’s current official textbook.
+            </p>
+        </div>
     </section>
 
-
-    <!-- TIMER -->
-
-    <section
-        id="timer"
-        class="page"
-    >
-
+    <section id="timer" class="page">
         <div class="card timer">
-
-            <h2>
-                ⏱️ Focus Mode
-            </h2>
-
-            <div class="timer-mode">
-                25 minute study session
-            </div>
-
-
-            <div
-                class="timer-display"
-                id="timerDisplay"
-            >
-                25:00
-            </div>
-
-
-            <button
-                class="primary"
-                onclick="startTimer()"
-                id="timerButton"
-            >
-                ▶ Start
-            </button>
-
-
-            <button
-                class="secondary"
-                onclick="resetTimer()"
-            >
-                ↻ Reset
-            </button>
-
+            <h2>⏱️ Focus Mode</h2>
+            <div class="timer-mode">25-minute study session</div>
+            <div class="timer-display" id="timerDisplay">25:00</div>
+            <button class="primary" onclick="startTimer()" id="timerButton">▶ Start</button>
+            <button class="secondary" onclick="resetTimer()">↻ Reset</button>
         </div>
-
     </section>
-
 </main>
 
-
 <script>
-
-/* =====================================================
-   DATA
-===================================================== */
-
-let data = JSON.parse(
-    localStorage.getItem("studyflow")
-) || {
-
+let data = JSON.parse(localStorage.getItem("studyflow-pakistan")) || {
     tasks: [],
-
     subjects: [
-        {
-            name: "Mathematics",
-            icon: "📐",
-            progress: 0
-        },
-
-        {
-            name: "Physics",
-            icon: "⚛️",
-            progress: 0
-        },
-
-        {
-            name: "Computer Science",
-            icon: "💻",
-            progress: 0
-        }
+        { name: "Mathematics", icon: "📐", progress: 0 },
+        { name: "Physics", icon: "⚛️", progress: 0 },
+        { name: "Computer Science", icon: "💻", progress: 0 }
     ],
-
     focusSessions: 0,
-
     dark: true
-
 };
-
-
-/* =====================================================
-   SAVE
-===================================================== */
 
 function save() {
-
-    localStorage.setItem(
-        "studyflow",
-        JSON.stringify(data)
-    );
-
+    localStorage.setItem("studyflow-pakistan", JSON.stringify(data));
 }
-
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
 
 function showPage(page, button) {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById(page).classList.add("active");
 
-    document
-        .querySelectorAll(".page")
-        .forEach(
-            p => p.classList.remove("active")
-        );
-
-
-    document
-        .getElementById(page)
-        .classList.add("active");
-
-
-    document
-        .querySelectorAll(".nav-btn")
-        .forEach(
-            b => b.classList.remove("active")
-        );
-
-
-    if (button) {
-
-        button.classList.add("active");
-
-    }
-
+    document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+    if (button) button.classList.add("active");
 
     const titles = {
-
         dashboard: "Good morning 👋",
-
         subjects: "Your Subjects 📚",
-
         planner: "Study Planner ✅",
-
-        quiz: "Quiz Center 🧠",
-
+        quiz: "Pakistan Board Quiz 🧠",
         timer: "Focus Mode ⏱️"
-
     };
 
-
-    document.getElementById(
-        "pageTitle"
-    ).textContent =
-        titles[page];
-
-
-    document
-        .getElementById("sidebar")
-        .classList.remove("open");
-
-
+    document.getElementById("pageTitle").textContent = titles[page];
+    document.getElementById("sidebar").classList.remove("open");
     renderAll();
-
 }
-
 
 function showPageByName(page) {
-
-    const button =
-        [...document.querySelectorAll(".nav-btn")]
-        .find(
-            b => b.textContent
-                .toLowerCase()
-                .includes(page)
-        );
-
-
+    const button = [...document.querySelectorAll(".nav-btn")]
+        .find(b => b.textContent.toLowerCase().includes(page));
     showPage(page, button);
-
 }
-
 
 function toggleMenu() {
-
-    document
-        .getElementById("sidebar")
-        .classList.toggle("open");
-
+    document.getElementById("sidebar").classList.toggle("open");
 }
-
-
-/* =====================================================
-   THEME
-===================================================== */
 
 function toggleTheme() {
-
     data.dark = !data.dark;
-
-    document.body.classList.toggle(
-        "light",
-        !data.dark
-    );
-
-    document.getElementById(
-        "themeButton"
-    ).textContent =
-        data.dark ? "🌙" : "☀️";
-
+    document.body.classList.toggle("light", !data.dark);
+    document.getElementById("themeButton").textContent = data.dark ? "🌙" : "☀️";
     save();
-
 }
-
-
-/* =====================================================
-   TASKS
-===================================================== */
 
 function addTask() {
-
-    const input =
-        document.getElementById(
-            "taskInput"
-        );
-
-    const subject =
-        document.getElementById(
-            "taskSubject"
-        );
-
-
-    const text =
-        input.value.trim();
-
+    const input = document.getElementById("taskInput");
+    const subject = document.getElementById("taskSubject");
+    const text = input.value.trim();
 
     if (!text) {
-
         alert("Enter a task first.");
-
         return;
-
     }
-
 
     data.tasks.push({
-
         id: Date.now(),
-
-        text: text,
-
-        subject:
-            subject.value.trim() ||
-            "General",
-
+        text,
+        subject: subject.value.trim() || "General",
         completed: false
-
     });
-
 
     input.value = "";
-
     subject.value = "";
-
     save();
-
     renderAll();
-
 }
-
 
 function toggleTask(id) {
-
-    const task =
-        data.tasks.find(
-            t => t.id === id
-        );
-
-
-    if (task) {
-
-        task.completed =
-            !task.completed;
-
-    }
-
-
+    const task = data.tasks.find(t => t.id === id);
+    if (task) task.completed = !task.completed;
     save();
-
     renderAll();
-
 }
-
 
 function deleteTask(id) {
-
-    data.tasks =
-        data.tasks.filter(
-            t => t.id !== id
-        );
-
-
+    data.tasks = data.tasks.filter(t => t.id !== id);
     save();
-
     renderAll();
-
 }
-
-
-/* =====================================================
-   RENDER TASKS
-===================================================== */
 
 function taskHTML(task) {
-
     return `
-
-        <div class="task ${
-            task.completed
-                ? "completed"
-                : ""
-        }">
-
-            <input
-                type="checkbox"
-                class="task-check"
-                ${
-                    task.completed
-                        ? "checked"
-                        : ""
-                }
-                onchange="
-                    toggleTask(${task.id})
-                "
-            >
-
-            <span>
-                ${escapeHTML(task.text)}
-            </span>
-
-            <span class="task-subject">
-                ${escapeHTML(task.subject)}
-            </span>
-
-            <button
-                class="secondary"
-                onclick="
-                    deleteTask(${task.id})
-                "
-            >
-                ✕
-            </button>
-
+        <div class="task ${task.completed ? "completed" : ""}">
+            <input type="checkbox" class="task-check"
+                ${task.completed ? "checked" : ""}
+                onchange="toggleTask(${task.id})">
+            <span>${escapeHTML(task.text)}</span>
+            <span class="task-subject">${escapeHTML(task.subject)}</span>
+            <button class="secondary" onclick="deleteTask(${task.id})">✕</button>
         </div>
-
     `;
-
 }
-
 
 function renderTasks() {
-
-    const dashboard =
-        document.getElementById(
-            "dashboardTasks"
-        );
-
-    const planner =
-        document.getElementById(
-            "plannerTasks"
-        );
-
+    const dashboard = document.getElementById("dashboardTasks");
+    const planner = document.getElementById("plannerTasks");
 
     if (data.tasks.length === 0) {
-
-        const empty =
-            `<div class="empty">
-                No tasks yet. Add one to get started! 🚀
-             </div>`;
-
+        const empty = `<div class="empty">No tasks yet. Add one to get started!</div>`;
         dashboard.innerHTML = empty;
-
         planner.innerHTML = empty;
-
         return;
-
     }
 
-
-    const html =
-        data.tasks
-        .map(taskHTML)
-        .join("");
-
-
-    dashboard.innerHTML =
-        html;
-
-
-    planner.innerHTML =
-        html;
-
+    const html = data.tasks.map(taskHTML).join("");
+    dashboard.innerHTML = html;
+    planner.innerHTML = html;
 }
-
-
-/* =====================================================
-   SUBJECTS
-===================================================== */
 
 function addSubject() {
-
-    const name =
-        prompt(
-            "Enter subject name:"
-        );
-
-
-    if (!name || !name.trim()) {
-
-        return;
-
-    }
-
+    const name = prompt("Enter subject name:");
+    if (!name || !name.trim()) return;
 
     data.subjects.push({
-
         name: name.trim(),
-
         icon: "📘",
-
         progress: 0
-
     });
 
-
     save();
-
     renderSubjects();
-
 }
-
 
 function renderSubjects() {
+    const grid = document.getElementById("subjectGrid");
 
-    const grid =
-        document.getElementById(
-            "subjectGrid"
-        );
+    grid.innerHTML = data.subjects.map((subject, index) => `
+        <div class="subject-card">
+            <div class="subject-icon">${subject.icon}</div>
+            <div class="subject-name">${escapeHTML(subject.name)}</div>
+            <div class="subject-progress">${subject.progress}% complete</div>
 
-
-    grid.innerHTML =
-        data.subjects
-        .map(
-            (subject, index) => `
-
-            <div class="subject-card">
-
-                <div class="subject-icon">
-                    ${subject.icon}
-                </div>
-
-                <div class="subject-name">
-                    ${escapeHTML(
-                        subject.name
-                    )}
-                </div>
-
-                <div class="subject-progress">
-
-                    ${subject.progress}% complete
-
-                </div>
-
-                <div class="progress">
-
-                    <div
-                        class="progress-bar"
-                        style="
-                            width:
-                            ${subject.progress}%
-                        "
-                    ></div>
-
-                </div>
-
-                <button
-                    class="secondary"
-                    style="margin-top:15px"
-                    onclick="
-                        changeSubjectProgress(
-                            ${index}
-                        )
-                    "
-                >
-                    Update Progress
-                </button>
-
+            <div class="progress">
+                <div class="progress-bar" style="width:${subject.progress}%"></div>
             </div>
 
-        `
-        )
-        .join("");
-
+            <button class="secondary" style="margin-top:15px"
+                onclick="changeSubjectProgress(${index})">
+                Update Progress
+            </button>
+        </div>
+    `).join("");
 }
-
 
 function changeSubjectProgress(index) {
+    const value = prompt(
+        "Enter progress from 0 to 100:",
+        data.subjects[index].progress
+    );
 
-    const value =
-        prompt(
-            "Enter progress from 0 to 100:",
-            data.subjects[index].progress
-        );
+    const number = Number(value);
 
-
-    const number =
-        Number(value);
-
-
-    if (
-        Number.isFinite(number) &&
-        number >= 0 &&
-        number <= 100
-    ) {
-
-        data.subjects[index].progress =
-            number;
-
+    if (Number.isFinite(number) && number >= 0 && number <= 100) {
+        data.subjects[index].progress = number;
         save();
-
         renderSubjects();
-
     }
-
 }
-
-
-/* =====================================================
-   DASHBOARD
-===================================================== */
 
 function renderDashboard() {
+    const total = data.tasks.length;
+    const completed = data.tasks.filter(t => t.completed).length;
+    const percentage = total === 0 ? 0 : Math.round(completed / total * 100);
 
-    const total =
-        data.tasks.length;
-
-
-    const completed =
-        data.tasks.filter(
-            t => t.completed
-        ).length;
-
-
-    const percentage =
-        total === 0
-            ? 0
-            : Math.round(
-                completed /
-                total *
-                100
-            );
-
-
-    document.getElementById(
-        "completedCount"
-    ).textContent =
-        completed;
-
-
-    document.getElementById(
-        "totalCount"
-    ).textContent =
-        total;
-
-
-    document.getElementById(
-        "progressPercent"
-    ).textContent =
-        percentage + "%";
-
-
-    document.getElementById(
-        "focusCount"
-    ).textContent =
-        data.focusSessions;
-
-
-    document.getElementById(
-        "progressText"
-    ).textContent =
-        percentage +
-        "% completed";
-
-
-    document.getElementById(
-        "mainProgress"
-    ).style.width =
-        percentage + "%";
-
+    document.getElementById("completedCount").textContent = completed;
+    document.getElementById("totalCount").textContent = total;
+    document.getElementById("progressPercent").textContent = percentage + "%";
+    document.getElementById("focusCount").textContent = data.focusSessions;
+    document.getElementById("progressText").textContent = percentage + "% completed";
+    document.getElementById("mainProgress").style.width = percentage + "%";
 }
 
-
-/* =====================================================
-   QUIZ DATA
-===================================================== */
-
-const quizzes = {
-
-    "General Knowledge": [
-
-        {
-            q: "What is the largest planet in our solar system?",
-            options: [
-                "Earth",
-                "Mars",
-                "Jupiter",
-                "Venus"
-            ],
-            answer: 2
+/* Pakistan curriculum structure.
+   Confirm chapter names and textbook edition with your own school or board. */
+const pakistanCurriculum = {
+    "9": {
+        "Mathematics": {
+            chapters: {
+                "Real Numbers": [
+                    {
+                        q: "Which of the following is an irrational number?",
+                        options: ["0.75", "√2", "3/4", "-8"],
+                        answer: 1,
+                        explanation: "√2 cannot be written as a ratio of two integers, so it is irrational."
+                    }
+                ],
+                "Logarithms": [
+                    {
+                        q: "What is the value of log₁₀(100)?",
+                        options: ["1", "2", "10", "100"],
+                        answer: 1,
+                        explanation: "Because 10² = 100, log₁₀(100) = 2."
+                    }
+                ],
+                "Sets and Functions": []
+            }
         },
-
-        {
-            q: "How many continents are there?",
-            options: [
-                "5",
-                "6",
-                "7",
-                "8"
-            ],
-            answer: 2
+        "Physics": {
+            chapters: {
+                "Physical Quantities and Measurement": [
+                    {
+                        q: "What is the SI unit of length?",
+                        options: ["Centimetre", "Metre", "Kilometre", "Inch"],
+                        answer: 1,
+                        explanation: "The SI base unit for length is the metre."
+                    }
+                ],
+                "Kinematics": [],
+                "Dynamics": []
+            }
         },
-
-        {
-            q: "Which ocean is the largest?",
-            options: [
-                "Atlantic",
-                "Pacific",
-                "Indian",
-                "Arctic"
-            ],
-            answer: 1
+        "Chemistry": {
+            chapters: {
+                "Fundamentals of Chemistry": [],
+                "Structure of Atoms": [],
+                "Periodic Table and Periodicity": []
+            }
         },
-
-        {
-            q: "What gas do plants absorb?",
-            options: [
-                "Oxygen",
-                "Nitrogen",
-                "Carbon dioxide",
-                "Hydrogen"
-            ],
-            answer: 2
+        "Biology": {
+            chapters: {
+                "Introduction to Biology": [],
+                "Solving a Biological Problem": [],
+                "Biodiversity": []
+            }
+        },
+        "Computer Science": {
+            chapters: {
+                "Problem Solving": [],
+                "Data Types": [],
+                "Information Networks": []
+            }
         }
+    },
 
-    ],
-
-
-    "Computer Science": [
-
-        {
-            q: "What does CPU stand for?",
-            options: [
-                "Central Processing Unit",
-                "Computer Personal Unit",
-                "Central Program Utility",
-                "Control Processing User"
-            ],
-            answer: 0
+    "10": {
+        "Mathematics": {
+            chapters: {
+                "Quadratic Equations": [
+                    {
+                        q: "Which expression is a quadratic equation?",
+                        options: ["x + 4 = 0", "x² - 5x + 6 = 0", "x³ = 8", "1/x = 2"],
+                        answer: 1,
+                        explanation: "A quadratic equation has highest exponent 2."
+                    }
+                ],
+                "Theory of Quadratic Equations": [],
+                "Variations": []
+            }
         },
-
-        {
-            q: "Which language is commonly used for web page structure?",
-            options: [
-                "Python",
-                "HTML",
-                "SQL",
-                "C++"
-            ],
-            answer: 1
+        "Physics": {
+            chapters: {
+                "Simple Harmonic Motion and Waves": [],
+                "Sound": [],
+                "Geometrical Optics": []
+            }
         },
-
-        {
-            q: "What does RAM stand for?",
-            options: [
-                "Random Access Memory",
-                "Read Access Module",
-                "Rapid Application Memory",
-                "Remote Access Machine"
-            ],
-            answer: 0
+        "Chemistry": {
+            chapters: {
+                "Chemical Equilibrium": [],
+                "Acids, Bases and Salts": [],
+                "Organic Chemistry": []
+            }
+        },
+        "Biology": {
+            chapters: {
+                "Gaseous Exchange": [],
+                "Homeostasis": [],
+                "Support and Movement": []
+            }
+        },
+        "Computer Science": {
+            chapters: {
+                "Programming Fundamentals": [],
+                "Control Structures": [],
+                "Arrays": []
+            }
         }
+    },
 
-    ],
-
-
-    "Mathematics": [
-
-        {
-            q: "What is 12 × 8?",
-            options: [
-                "86",
-                "96",
-                "108",
-                "112"
-            ],
-            answer: 1
+    "11": {
+        "Mathematics": {
+            chapters: {
+                "Complex Numbers": [
+                    {
+                        q: "What is the value of i²?",
+                        options: ["1", "-1", "i", "-i"],
+                        answer: 1,
+                        explanation: "The imaginary unit is defined by i² = -1."
+                    }
+                ],
+                "Matrices and Determinants": [],
+                "Quadratic Equations": []
+            }
         },
-
-        {
-            q: "What is the square root of 144?",
-            options: [
-                "10",
-                "11",
-                "12",
-                "14"
-            ],
-            answer: 2
+        "Physics": {
+            chapters: {
+                "Measurements": [],
+                "Vectors and Equilibrium": [],
+                "Motion and Force": []
+            }
         },
-
-        {
-            q: "What is 25% of 200?",
-            options: [
-                "25",
-                "40",
-                "50",
-                "75"
-            ],
-            answer: 2
+        "Chemistry": {
+            chapters: {
+                "Basic Concepts": [],
+                "Experimental Techniques in Chemistry": [],
+                "Gases": []
+            }
+        },
+        "Biology": {
+            chapters: {
+                "Bioenergetics": [],
+                "Enzymes": [],
+                "Cell Structure and Function": []
+            }
+        },
+        "Computer Science": {
+            chapters: {
+                "Introduction to Programming": [],
+                "Data Types": [],
+                "Input and Output": []
+            }
         }
+    },
 
-    ],
-
-
-    "Physics": [
-
-        {
-            q: "What is the SI unit of force?",
-            options: [
-                "Joule",
-                "Watt",
-                "Newton",
-                "Pascal"
-            ],
-            answer: 2
+    "12": {
+        "Mathematics": {
+            chapters: {
+                "Functions and Limits": [
+                    {
+                        q: "A function maps each input to how many outputs?",
+                        options: ["Zero only", "Exactly one", "At least two", "Infinite only"],
+                        answer: 1,
+                        explanation: "In a function, every input has exactly one output."
+                    }
+                ],
+                "Differentiation": [],
+                "Integration": []
+            }
         },
-
-        {
-            q: "What is the approximate acceleration due to gravity on Earth?",
-            options: [
-                "4.9 m/s²",
-                "9.8 m/s²",
-                "15 m/s²",
-                "20 m/s²"
-            ],
-            answer: 1
+        "Physics": {
+            chapters: {
+                "Electrostatics": [],
+                "Current Electricity": [],
+                "Electromagnetism": []
+            }
         },
-
-        {
-            q: "Which quantity has both magnitude and direction?",
-            options: [
-                "Mass",
-                "Temperature",
-                "Speed",
-                "Velocity"
-            ],
-            answer: 3
+        "Chemistry": {
+            chapters: {
+                "Periodic Classification of Elements": [],
+                "s-Block Elements": [],
+                "d- and f-Block Elements": []
+            }
+        },
+        "Biology": {
+            chapters: {
+                "Nervous Coordination": [],
+                "Chemical Coordination": [],
+                "Reproduction": []
+            }
+        },
+        "Computer Science": {
+            chapters: {
+                "Database Systems": [],
+                "Data Communication": [],
+                "Web Development": []
+            }
         }
-
-    ],
-
-
-    "English": [
-
-        {
-            q: "Which word is a noun?",
-            options: [
-                "Quickly",
-                "Beautiful",
-                "Teacher",
-                "Run"
-            ],
-            answer: 2
-        },
-
-        {
-            q: "What is the opposite of 'ancient'?",
-            options: [
-                "Old",
-                "Modern",
-                "Historic",
-                "Past"
-            ],
-            answer: 1
-        },
-
-        {
-            q: "Which sentence is grammatically correct?",
-            options: [
-                "He go to school.",
-                "He going school.",
-                "He goes to school.",
-                "He gone school."
-            ],
-            answer: 2
-        }
-
-    ]
-
+    }
 };
 
-
 let currentQuestions = [];
-
 let currentQuestion = 0;
-
 let quizScore = 0;
 
+function loadSubjects() {
+    const classValue = document.getElementById("quizClass").value;
+    const subjectSelect = document.getElementById("quizSubject");
+    const chapterSelect = document.getElementById("quizChapter");
 
-/* =====================================================
-   START QUIZ
-===================================================== */
+    subjectSelect.innerHTML = `<option value="">Select subject</option>`;
+    chapterSelect.innerHTML = `<option value="">Select chapter</option>`;
 
-function startQuiz() {
+    if (!classValue || !pakistanCurriculum[classValue]) return;
 
-    const subject =
-        document.getElementById(
-            "quizSubject"
-        ).value;
-
-
-    currentQuestions =
-        [...quizzes[subject]]
-        .sort(
-            () => Math.random() - .5
-        );
-
-
-    currentQuestion = 0;
-
-    quizScore = 0;
-
-    showQuestion();
-
+    Object.keys(pakistanCurriculum[classValue]).forEach(subject => {
+        const option = document.createElement("option");
+        option.value = subject;
+        option.textContent = subject;
+        subjectSelect.appendChild(option);
+    });
 }
 
+function loadChapters() {
+    const classValue = document.getElementById("quizClass").value;
+    const subject = document.getElementById("quizSubject").value;
+    const chapterSelect = document.getElementById("quizChapter");
 
-/* =====================================================
-   SHOW QUESTION
-===================================================== */
+    chapterSelect.innerHTML = `<option value="">Select chapter</option>`;
+
+    if (!classValue || !subject) return;
+
+    const chapters = pakistanCurriculum[classValue][subject].chapters;
+
+    Object.keys(chapters).forEach(chapter => {
+        const option = document.createElement("option");
+        option.value = chapter;
+        option.textContent = chapter;
+        chapterSelect.appendChild(option);
+    });
+}
+
+function startChapterQuiz() {
+    const classValue = document.getElementById("quizClass").value;
+    const subject = document.getElementById("quizSubject").value;
+    const chapter = document.getElementById("quizChapter").value;
+
+    if (!classValue || !subject || !chapter) {
+        alert("Please select class, subject, and chapter.");
+        return;
+    }
+
+    currentQuestions = pakistanCurriculum[classValue][subject].chapters[chapter];
+
+    if (!currentQuestions || currentQuestions.length === 0) {
+        alert("No local MCQs have been added for this chapter yet. Click Generate AI MCQs.");
+        return;
+    }
+
+    currentQuestions = [...currentQuestions].sort(() => Math.random() - 0.5);
+    currentQuestion = 0;
+    quizScore = 0;
+    showQuestion();
+}
 
 function showQuestion() {
+    const box = document.getElementById("quizBox");
 
-    const box =
-        document.getElementById(
-            "quizBox"
-        );
-
-
-    if (
-        currentQuestion >=
-        currentQuestions.length
-    ) {
-
+    if (currentQuestion >= currentQuestions.length) {
         finishQuiz();
-
         return;
-
     }
 
-
-    const question =
-        currentQuestions[
-            currentQuestion
-        ];
-
+    const question = currentQuestions[currentQuestion];
 
     box.innerHTML = `
-
-        <div
-            style="
-            color:var(--muted);
-            margin-bottom:15px;
-            "
-        >
-            Question
-            ${currentQuestion + 1}
-            /
-            ${currentQuestions.length}
+        <div style="color:var(--muted); margin-bottom:15px;">
+            Question ${currentQuestion + 1} / ${currentQuestions.length}
         </div>
 
-        <div class="quiz-question">
-
-            ${escapeHTML(
-                question.q
-            )}
-
-        </div>
+        <div class="quiz-question">${escapeHTML(question.q)}</div>
 
         <div>
-
-            ${question.options
-                .map(
-                    (option, index) => `
-
-                    <button
-                        class="option"
-                        onclick="
-                            answerQuestion(
-                                ${index}
-                            )
-                        "
-                    >
-                        ${String.fromCharCode(
-                            65 + index
-                        )}.
-                        ${escapeHTML(
-                            option
-                        )}
-                    </button>
-
-                `
-                )
-                .join("")}
-
+            ${question.options.map((option, index) => `
+                <button class="option" onclick="answerQuestion(${index})">
+                    ${String.fromCharCode(65 + index)}. ${escapeHTML(option)}
+                </button>
+            `).join("")}
         </div>
 
+        <div id="explanationBox"></div>
     `;
-
 }
-
-
-/* =====================================================
-   ANSWER
-===================================================== */
 
 function answerQuestion(selected) {
+    const question = currentQuestions[currentQuestion];
+    const buttons = document.querySelectorAll(".option");
 
-    const question =
-        currentQuestions[
-            currentQuestion
-        ];
+    buttons.forEach(button => button.disabled = true);
 
-
-    const buttons =
-        document.querySelectorAll(
-            ".option"
-        );
-
-
-    buttons.forEach(
-        b => b.disabled = true
-    );
-
-
-    if (
-        selected ===
-        question.answer
-    ) {
-
-        buttons[selected]
-            .classList.add(
-                "correct"
-            );
-
+    if (selected === question.answer) {
+        buttons[selected].classList.add("correct");
         quizScore++;
-
     } else {
-
-        buttons[selected]
-            .classList.add(
-                "wrong"
-            );
-
-        buttons[question.answer]
-            .classList.add(
-                "correct"
-            );
-
+        buttons[selected].classList.add("wrong");
+        buttons[question.answer].classList.add("correct");
     }
 
-
-    setTimeout(
-        () => {
-
-            currentQuestion++;
-
-            showQuestion();
-
-        },
-        700
-    );
-
-}
-
-
-/* =====================================================
-   QUIZ RESULT
-===================================================== */
-
-function finishQuiz() {
-
-    const total =
-        currentQuestions.length;
-
-
-    const percentage =
-        Math.round(
-            quizScore /
-            total *
-            100
-        );
-
-
-    data.focusSessions++;
-
-    save();
-
-    document.getElementById(
-        "quizBox"
-    ).innerHTML = `
-
-        <div class="quiz-result">
-
-            <div class="score-big">
-                ${percentage}%
-            </div>
-
-            <h2>
-                ${quizScore}
-                /
-                ${total}
-            </h2>
-
-            <p
-                style="
-                color:var(--muted);
-                margin:12px;
-                "
-            >
-                ${
-                    percentage >= 80
-                        ? "Excellent work! 🔥"
-                        : percentage >= 50
-                        ? "Good job! Keep practicing! 💪"
-                        : "Keep learning and try again! 📚"
-                }
-            </p>
-
-            <button
-                class="primary"
-                onclick="startQuiz()"
-            >
-                Try Again
-            </button>
-
-        </div>
-
+    document.getElementById("explanationBox").innerHTML = `
+        <p class="explanation">
+            ${escapeHTML(question.explanation || "Review this concept in your textbook.")}
+        </p>
     `;
 
+    setTimeout(() => {
+        currentQuestion++;
+        showQuestion();
+    }, 1800);
+}
+
+function finishQuiz() {
+    const total = currentQuestions.length;
+    const percentage = Math.round(quizScore / total * 100);
+
+    data.focusSessions++;
+    save();
+
+    document.getElementById("quizBox").innerHTML = `
+        <div class="quiz-result">
+            <div class="score-big">${percentage}%</div>
+            <h2>${quizScore} / ${total}</h2>
+            <p style="color:var(--muted); margin:12px;">
+                ${percentage >= 80 ? "Excellent work!" :
+                  percentage >= 50 ? "Good effort. Review the missed concepts." :
+                  "Keep practising and check the chapter again."}
+            </p>
+            <button class="primary" onclick="returnToQuizMenu()">Choose Another Chapter</button>
+        </div>
+    `;
 
     renderDashboard();
-
 }
 
+function returnToQuizMenu() {
+    document.getElementById("quizBox").innerHTML = `
+        <h2>Chapter MCQ Test</h2>
+        <p style="color:var(--muted); margin:12px 0 20px;">
+            Choose your class, subject, and chapter.
+        </p>
 
-/* =====================================================
-   TIMER
-===================================================== */
+        <select id="quizClass" onchange="loadSubjects()">
+            <option value="">Select class</option>
+            <option value="9">Class 9</option>
+            <option value="10">Class 10</option>
+            <option value="11">Class 11 — 1st Year</option>
+            <option value="12">Class 12 — 2nd Year</option>
+        </select>
 
-let timerSeconds = 25 * 60;
+        <select id="quizSubject" onchange="loadChapters()" style="margin-top:12px">
+            <option value="">Select subject</option>
+        </select>
 
-let timerInterval = null;
+        <select id="quizChapter" style="margin-top:12px">
+            <option value="">Select chapter</option>
+        </select>
 
-let timerRunning = false;
+        <button class="primary" style="margin-top:15px" onclick="startChapterQuiz()">
+            Start Chapter Test
+        </button>
 
-
-function updateTimerDisplay() {
-
-    const minutes =
-        Math.floor(
-            timerSeconds / 60
-        );
-
-    const seconds =
-        timerSeconds % 60;
-
-
-    document.getElementById(
-        "timerDisplay"
-    ).textContent =
-
-        String(minutes).padStart(
-            2,
-            "0"
-        ) +
-
-        ":" +
-
-        String(seconds).padStart(
-            2,
-            "0"
-        );
-
+        <button class="secondary" style="margin-top:15px" onclick="askAI()">
+            Generate AI MCQs
+        </button>
+    `;
 }
 
+/* AI FRONT-END FUNCTION
+   Do NOT place your secret API key here.
+   This calls a secure server route: /api/generate-mcqs */
+async function askAI() {
+    const classValue = document.getElementById("quizClass").value;
+    const subject = document.getElementById("quizSubject").value;
+    const chapter = document.getElementById("quizChapter").value;
 
-function startTimer() {
-
-    if (timerRunning) {
-
-        clearInterval(
-            timerInterval
-        );
-
-        timerRunning = false;
-
-        document.getElementById(
-            "timerButton"
-        ).textContent =
-            "▶ Resume";
-
+    if (!classValue || !subject || !chapter) {
+        alert("Select class, subject, and chapter first.");
         return;
-
     }
 
+    const box = document.getElementById("quizBox");
+
+    box.innerHTML = `
+        <div class="empty">
+            Creating chapter-based MCQs. Please wait...
+        </div>
+    `;
+
+    try {
+        const response = await fetch("/api/generate-mcqs", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                classLevel: classValue,
+                subject,
+                chapter,
+                board: "Punjab Pakistan",
+                count: 10
+            })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || "Could not generate MCQs.");
+        }
+
+        if (!Array.isArray(result.questions) || result.questions.length === 0) {
+            throw new Error("AI returned no usable MCQs.");
+        }
+
+        currentQuestions = result.questions;
+        currentQuestion = 0;
+        quizScore = 0;
+        showQuestion();
+
+    } catch (error) {
+        box.innerHTML = `
+            <div class="empty">
+                ${escapeHTML(error.message)}
+                <br><br>
+                <button class="secondary" onclick="returnToQuizMenu()">
+                    Back to Quiz Menu
+                </button>
+            </div>
+        `;
+    }
+}
+
+let timerSeconds = 25 * 60;
+let timerInterval = null;
+let timerRunning = false;
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(timerSeconds / 60);
+    const seconds = timerSeconds % 60;
+
+    document.getElementById("timerDisplay").textContent =
+        String(minutes).padStart(2, "0") + ":" +
+        String(seconds).padStart(2, "0");
+}
+
+function startTimer() {
+    if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        document.getElementById("timerButton").textContent = "▶ Resume";
+        return;
+    }
 
     timerRunning = true;
+    document.getElementById("timerButton").textContent = "⏸ Pause";
 
+    timerInterval = setInterval(() => {
+        timerSeconds--;
+        updateTimerDisplay();
 
-    document.getElementById(
-        "timerButton"
-    ).textContent =
-        "⏸ Pause";
-
-
-    timerInterval =
-        setInterval(
-            () => {
-
-                timerSeconds--;
-
-                updateTimerDisplay();
-
-
-                if (
-                    timerSeconds <= 0
-                ) {
-
-                    clearInterval(
-                        timerInterval
-                    );
-
-                    timerRunning =
-                        false;
-
-                    data.focusSessions++;
-
-                    save();
-
-                    alert(
-                        "🎉 Focus session complete!"
-                    );
-
-                    resetTimer();
-
-                    renderDashboard();
-
-                }
-
-            },
-            1000
-        );
-
+        if (timerSeconds <= 0) {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            data.focusSessions++;
+            save();
+            alert("Focus session complete!");
+            resetTimer();
+            renderDashboard();
+        }
+    }, 1000);
 }
-
 
 function resetTimer() {
-
-    clearInterval(
-        timerInterval
-    );
-
+    clearInterval(timerInterval);
     timerRunning = false;
-
-    timerSeconds =
-        25 * 60;
-
+    timerSeconds = 25 * 60;
     updateTimerDisplay();
-
-    document.getElementById(
-        "timerButton"
-    ).textContent =
-        "▶ Start";
-
+    document.getElementById("timerButton").textContent = "▶ Start";
 }
-
-
-/* =====================================================
-   SECURITY
-===================================================== */
 
 function escapeHTML(value) {
-
     return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
+function enableScrollAnimations() {
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
 
-/* =====================================================
-   RENDER EVERYTHING
-===================================================== */
+    document.querySelectorAll(".card, .subject-card").forEach(item => {
+        if (!item.classList.contains("reveal")) {
+            item.classList.add("reveal");
+            observer.observe(item);
+        }
+    });
+}
 
 function renderAll() {
-
     renderTasks();
-
     renderSubjects();
-
     renderDashboard();
-
+    setTimeout(enableScrollAnimations, 30);
 }
 
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
-document.body.classList.toggle(
-    "light",
-    !data.dark
-);
-
-
-document.getElementById(
-    "themeButton"
-).textContent =
-    data.dark
-        ? "🌙"
-        : "☀️";
-
+document.body.classList.toggle("light", !data.dark);
+document.getElementById("themeButton").textContent = data.dark ? "🌙" : "☀️";
 
 updateTimerDisplay();
-
 renderAll();
-
 </script>
-
 </body>
 </html>
